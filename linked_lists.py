@@ -117,16 +117,9 @@ class Queue:
 def test_performance():
     """
     Tests the performance of Stack and Queue operations with different sizes.
-    Measures time for insertion and deletion of elements.
+    Includes validation and more detailed output.
     """
-    # Test sizes
     sizes = [100, 1000, 10000]
-    
-    # Initialize data structures for testing
-    structures = {
-        'Stack': Stack(),
-        'Queue': Queue()
-    }
     
     # Dictionary to store results
     results = {
@@ -134,35 +127,61 @@ def test_performance():
         'Delete': {size: {} for size in sizes}
     }
     
-    # Test each data structure
-    for name, structure in structures.items():
+    for name in ['Stack', 'Queue']:
+        print(f"\nTesting {name}:")
         for size in sizes:
-            # Generate random numbers for testing
+            print(f"\nSize: {size} elements")
+            
+            # Create fresh instance
+            structure = Stack() if name == 'Stack' else Queue()
+            
+            # Generate random numbers
             numbers = [random.randint(1, 10000) for _ in range(size)]
             
             # Test insertion
             start_time = time.time()
+            
+            # Insert elements and validate count
+            count = 0
             for num in numbers:
                 structure.insert(num)
+                count += 1
+            
             end_time = time.time()
-            results['Insert'][size][name] = round((end_time - start_time) * 1000, 2)
+            insert_time = round((end_time - start_time) * 1000, 2)
+            results['Insert'][size][name] = insert_time
+            
+            # Validate insertion
+            print(f"Inserted {count} elements in {insert_time}ms")
             
             # Test deletion
             start_time = time.time()
-            for _ in range(size):
-                structure.remove()
+            
+            # Delete elements and validate count
+            removed_count = 0
+            while structure.remove() is not None:
+                removed_count += 1
+            
             end_time = time.time()
-            results['Delete'][size][name] = round((end_time - start_time) * 1000, 2)
+            delete_time = round((end_time - start_time) * 1000, 2)
+            results['Delete'][size][name] = delete_time
+            
+            # Validate deletion
+            print(f"Removed {removed_count} elements in {delete_time}ms")
+            
+            # Verify counts match
+            if count != size or removed_count != size:
+                print(f"WARNING: Count mismatch! Expected {size}, "
+                      f"Inserted {count}, Removed {removed_count}")
     
-    # Print results in formatted table
+    # Print final results table
     print("\nPerformance Results (time in milliseconds):")
     print("=" * 70)
     print(f"{'Object / Code':<15} | {'Insert':->20} | {'Delete':->20}")
     print(f"{'':<15} | {'100':>6} {'1000':>6} {'10000':>6} | {'100':>6} {'1000':>6} {'10000':>6}")
     print("-" * 70)
     
-    # Print results for each data structure
-    for struct_name in structures.keys():
+    for struct_name in ['Stack', 'Queue']:
         row = f"{struct_name:<15} |"
         for size in sizes:
             row += f" {results['Insert'][size][struct_name]:>5.1f}"
