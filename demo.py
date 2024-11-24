@@ -42,60 +42,12 @@ def demonstrate_queue():
         print("Current queue:")
         queue.print()
 
-def manual_verification_test():
-    """
-    Quick test to manually verify stack and queue operations
-    """
-    print("\nManual Verification Test")
-    print("========================")
-    
-    # Test Stack
-    print("\nTesting Stack:")
-    stack = Stack()
-    
-    # Add 5 elements and verify
-    print("Adding elements 1-5...")
-    for i in range(1, 6):
-        stack.insert(i)
-    print("Stack contents:")
-    stack.print()
-    
-    # Remove and verify
-    print("\nRemoving elements (should be in reverse order):")
-    while True:
-        value = stack.remove()
-        if value is None:
-            break
-        print(f"Removed: {value}")
-    
-    # Test Queue
-    print("\nTesting Queue:")
-    queue = Queue()
-    
-    # Add 5 elements and verify
-    print("Adding elements 1-5...")
-    for i in range(1, 6):
-        queue.insert(i)
-    print("Queue contents:")
-    queue.print()
-    
-    # Remove and verify
-    print("\nRemoving elements (should be in order):")
-    while True:
-        value = queue.remove()
-        if value is None:
-            break
-        print(f"Removed: {value}")
-
 if __name__ == "__main__":
     print("Starting Data Structure Demonstrations")
     
-    # Run original demonstrations
+    # Run demonstrations
     demonstrate_stack()
     demonstrate_queue()
-    
-    # Run manual verification test
-    manual_verification_test()
     
     # Run performance tests
     print("\n=== Performance Testing ===")

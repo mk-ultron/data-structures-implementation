@@ -15,7 +15,7 @@ class Node:
 class Stack:
     """
     Stack implementation using a doubly-linked list.
-    Follows LIFO (Last In, First Out) principle.
+    Follows LIFO (Last In, First Out)
     """
     def __init__(self):
         self.head = None      # First node in the stack
@@ -66,7 +66,7 @@ class Stack:
 class Queue:
     """
     Queue implementation using a doubly-linked list.
-    Follows FIFO (First In, First Out) principle.
+    Follows FIFO (First In, First Out)
     """
     def __init__(self):
         self.head = None      # Front of queue (where we remove elements)
